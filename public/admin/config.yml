@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Hussnain-Dawood/hussnain-portfolio   # update if your repo name differs
   branch: main
-  base_url: https://YOUR-AUTH-WORKER.workers.dev  # replace after deploying the Worker
+  base_url: https://sveltia-cms-auth.hussnaindawood2.workers.dev  # replace after deploying the Worker
 
 # Where uploaded media is stored (committed to the repo)
 media_folder: "public/images/uploads"
