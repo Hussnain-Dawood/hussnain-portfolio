@@ -1,0 +1,84 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  canonicalURL?: URL | string;
+  publishDate?: Date;
+}
+
+const {
+  title,
+  description,
+  image = '/og-image.png',
+  type = 'website',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  publishDate,
+} = Astro.props;
+
+const siteURL = Astro.site?.toString().replace(/\/$/, '') ?? 'https://hussnaindawood.pages.dev';
+const pageTitle = title === 'Hussnain Dawood — Full Stack Developer'
+  ? title
+  : `${title} | Hussnain Dawood`;
+const imageURL = image.startsWith('http') ? image : `${siteURL}${image}`;
+const canonicalHref = canonicalURL.toString();
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Hussnain Dawood',
+  url: siteURL,
+  sameAs: [
+    'https://github.com/Hussnain-Dawood',
+    'https://www.linkedin.com/in/hussnaindawood',
+  ],
+  jobTitle: 'Full Stack Developer',
+  email: 'hussnaindawood2@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lahore',
+    addressCountry: 'PK',
+  },
+};
+
+const articleSchema = type === 'article' && publishDate
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      image: imageURL,
+      datePublished: publishDate.toISOString(),
+      author: { '@type': 'Person', name: 'Hussnain Dawood' },
+    }
+  : null;
+---
+
+<!-- Primary -->
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalHref} />
+<meta name="author" content="Hussnain Dawood" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:type"        content={type} />
+<meta property="og:url"         content={canonicalHref} />
+<meta property="og:title"       content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image"       content={imageURL} />
+<meta property="og:site_name"   content="Hussnain Dawood" />
+<meta property="og:locale"      content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image"       content={imageURL} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+{articleSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}

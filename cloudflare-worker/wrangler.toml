@@ -1,0 +1,10 @@
+name            = "sveltia-cms-auth"
+main            = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Secrets are NOT stored here — set them with:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+#
+# After deploying, copy the worker URL (shown in `wrangler deploy` output)
+# and paste it into public/admin/config.yml under `base_url:`.

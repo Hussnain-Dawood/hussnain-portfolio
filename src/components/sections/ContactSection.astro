@@ -1,0 +1,373 @@
+---
+const contactInfo = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+    label: 'Email',
+    value: 'hussnaindawood2@gmail.com',
+    href: 'mailto:hussnaindawood2@gmail.com',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    label: 'Location',
+    value: 'Lahore, Pakistan',
+    href: null,
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`,
+    label: 'GitHub',
+    value: 'github.com/Hussnain-Dawood',
+    href: 'https://github.com/Hussnain-Dawood',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/hussnaindawood',
+    href: 'https://www.linkedin.com/in/hussnaindawood',
+  },
+];
+---
+
+<section class="contact section" id="contact" aria-label="Contact">
+  <div class="contact__bg" aria-hidden="true"></div>
+  <div class="container contact__inner">
+
+    <!-- Left: info -->
+    <div class="contact__info" data-animate>
+      <span class="section-label" style="color:rgba(255,255,255,0.65); background:rgba(255,255,255,0.12)">&#47;&#47; contact</span>
+      <h2 class="contact__title">Let's Build Something Together</h2>
+      <p class="contact__subtitle">
+        I'm actively looking for internship opportunities and entry-level roles.
+        Have a project idea or an open position? I'd love to hear from you.
+      </p>
+
+      <ul class="contact__details">
+        {contactInfo.map(item => (
+          <li class="contact__detail">
+            <div class="contact__detail-icon" set:html={item.icon} />
+            <div>
+              <p class="contact__detail-label">{item.label}</p>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  class="contact__detail-value contact__detail-value--link"
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <p class="contact__detail-value">{item.value}</p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Right: contact form (Formspree) -->
+    <div class="contact__form-wrap" data-animate data-animate-delay="2">
+      <div class="contact__form-card">
+        <h3 class="contact__form-title">Send Me a Message</h3>
+
+        <p id="cf-status" class="cf-status" hidden></p>
+
+        <form class="contact__form" id="contact-form" novalidate>
+          <div class="form-field">
+            <label for="cf-name" class="form-label">Your name</label>
+            <input
+              type="text"
+              id="cf-name"
+              name="name"
+              class="form-input"
+              placeholder="Jane Smith"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="cf-subject" class="form-label">Subject</label>
+            <input
+              type="text"
+              id="cf-subject"
+              name="subject"
+              class="form-input"
+              placeholder="Let's work together"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="cf-message" class="form-label">Message</label>
+            <textarea
+              id="cf-message"
+              name="message"
+              class="form-input form-input--textarea"
+              rows="5"
+              placeholder="Tell me about your project or role..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" id="cf-submit" class="btn btn-primary contact__submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span>Send Message</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const form   = document.getElementById('contact-form') as HTMLFormElement | null;
+  const btn    = document.getElementById('cf-submit')    as HTMLButtonElement | null;
+  const status = document.getElementById('cf-status')    as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !btn || !status) return;
+
+    const data    = new FormData(form);
+    const name    = (data.get('name')    as string).trim();
+    const subject = (data.get('subject') as string).trim();
+    const message = (data.get('message') as string).trim();
+    if (!name || !subject || !message) return;
+
+    const btnText = btn.querySelector('span')!;
+    btn.disabled      = true;
+    btnText.textContent = 'Sending…';
+    status.hidden     = true;
+    status.className  = 'cf-status';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xykvkkvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, subject, message }),
+      });
+
+      if (res.ok) {
+        status.textContent = "Thanks! Your message has been sent — I'll get back to you soon.";
+        status.className   = 'cf-status cf-status--success';
+        status.hidden      = false;
+        form.reset();
+      } else {
+        const json = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(json?.error ?? 'Something went wrong');
+      }
+    } catch {
+      status.textContent = 'Something went wrong — please try again or email me directly.';
+      status.className   = 'cf-status cf-status--error';
+      status.hidden      = false;
+    } finally {
+      btn.disabled        = false;
+      btnText.textContent = 'Send Message';
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    position: relative;
+    background: var(--color-text);
+    color: rgba(255, 255, 255, 0.80);
+    overflow: hidden;
+  }
+
+  .contact__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(30, 95, 204, 0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 10% 90%, rgba(77, 133, 224, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .contact__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-16);
+    align-items: start;
+  }
+
+  /* ---- Info side ---- */
+  .contact__title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--color-white);
+    margin: var(--sp-4) 0 var(--sp-4);
+    line-height: 1.15;
+  }
+
+  .contact__subtitle {
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.75;
+    max-width: 44ch;
+    margin-bottom: var(--sp-8);
+  }
+
+  .contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+
+  .contact__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-4);
+  }
+
+  .contact__detail-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--r-md);
+    color: var(--color-primary-light);
+    flex-shrink: 0;
+  }
+
+  .contact__detail-label {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.50);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+    max-width: none;
+  }
+
+  .contact__detail-value {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: none;
+    word-break: break-all;
+  }
+
+  .contact__detail-value--link {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+
+  .contact__detail-value--link:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+  }
+
+  /* ---- Form card ---- */
+  .contact__form-card {
+    background: var(--color-white);
+    border-radius: var(--r-2xl);
+    padding: var(--sp-8) var(--sp-8);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .contact__form-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--sp-2);
+  }
+
+  .contact__form-note {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    margin-bottom: var(--sp-6);
+    max-width: none;
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .form-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--r-md);
+    outline: none;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    resize: vertical;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  .form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(30, 95, 204, 0.15);
+    background: var(--color-white);
+  }
+
+  .form-input--textarea {
+    min-height: 120px;
+  }
+
+  .cf-status {
+    font-size: var(--text-sm);
+    border-radius: var(--r-md);
+    padding: 0.65rem 0.9rem;
+    margin-bottom: var(--sp-4);
+    max-width: none;
+  }
+
+  .cf-status--success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  .cf-status--error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+
+  .contact__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .contact__inner {
+      grid-template-columns: 1fr;
+      gap: var(--sp-10);
+    }
+
+    .contact__subtitle {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact__form-card {
+      padding: var(--sp-6);
+    }
+  }
+</style>

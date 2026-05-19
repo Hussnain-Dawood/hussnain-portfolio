@@ -1,0 +1,260 @@
+---
+const navLinks = [
+  { href: '#about',      label: 'About'      },
+  { href: '#experience', label: 'Experience' },
+  { href: '#skills',     label: 'Skills'     },
+  { href: '#education',  label: 'Education'  },
+  { href: '#projects',   label: 'Projects'   },
+  { href: '#contact',    label: 'Contact'    },
+];
+---
+
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <!-- Logo -->
+    <a href="/" class="header__logo" aria-label="Hussnain Dawood – home">
+      <span class="header__logo-badge">HD</span>
+      <span class="header__logo-name">Hussnain Dawood</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="header__nav" id="nav-menu" aria-label="Primary navigation">
+      <ul class="header__nav-list">
+        {navLinks.map(link => (
+          <li>
+            <a href={link.href} class="header__nav-link">{link.label}</a>
+          </li>
+        ))}
+        <li>
+          <a href="/blog" class="header__nav-link header__nav-link--cta">Blog</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Hamburger -->
+    <button
+      class="header__toggle"
+      id="menu-toggle"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <span class="header__toggle-bar"></span>
+      <span class="header__toggle-bar"></span>
+      <span class="header__toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: var(--nav-height);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+    transition: box-shadow var(--t-base);
+  }
+
+  .header.is-scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  /* ---- Logo ---- */
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .header__logo-badge {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--r-md);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .header__logo-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  /* ---- Nav ---- */
+  .header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  .header__nav-link {
+    display: block;
+    padding: 0.4rem 0.7rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-radius: var(--r-md);
+    transition: color var(--t-fast), background var(--t-fast);
+    text-decoration: none;
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-muted);
+  }
+
+  .header__nav-link--cta {
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    padding: 0.4rem 0.9rem;
+    margin-left: var(--sp-2);
+    font-weight: 600;
+  }
+
+  .header__nav-link--cta:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  /* ---- Hamburger ---- */
+  .header__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: var(--r-md);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background var(--t-fast);
+  }
+
+  .header__toggle:hover {
+    background: var(--color-bg-subtle);
+  }
+
+  .header__toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: all var(--t-base);
+    transform-origin: center;
+  }
+
+  /* X state */
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 768px) {
+    .header__logo-name {
+      display: none;
+    }
+
+    .header__toggle {
+      display: flex;
+    }
+
+    .header__nav {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--sp-4) var(--sp-4) var(--sp-6);
+      transform: translateY(-110%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform var(--t-base), opacity var(--t-base), visibility var(--t-base);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header__nav.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .header__nav-list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--sp-1);
+    }
+
+    .header__nav-link {
+      padding: 0.75rem 1rem;
+      font-size: var(--text-base);
+    }
+
+    .header__nav-link--cta {
+      margin-left: 0;
+      margin-top: var(--sp-3);
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  const header  = document.getElementById('site-header')!;
+  const toggle  = document.getElementById('menu-toggle')!;
+  const navMenu = document.getElementById('nav-menu')!;
+
+  /* Scroll shadow */
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Toggle mobile menu */
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open navigation menu' : 'Close navigation menu');
+    navMenu.classList.toggle('is-open', !open);
+    document.body.style.overflow = open ? '' : 'hidden';
+  });
+
+  /* Close on anchor link click (same-page navigation) */
+  navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+      navMenu.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

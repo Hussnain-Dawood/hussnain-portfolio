@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Thoughts, tutorials, and insights on full-stack development, MERN stack, C++, Python, and software engineering — by Hussnain Dawood."
+>
+  <!-- Page header -->
+  <header class="blog-header">
+    <div class="container blog-header__inner">
+      <span class="section-label">// writing</span>
+      <h1 class="blog-header__title">Blog</h1>
+      <p class="blog-header__subtitle">
+        Thoughts on full-stack development, MERN stack, algorithms, and building software that ships.
+      </p>
+    </div>
+  </header>
+
+  <!-- Post grid -->
+  <main class="blog-main">
+    <div class="container">
+      {allPosts.length === 0 ? (
+        <div class="blog-empty">
+          <p>No posts yet — check back soon!</p>
+        </div>
+      ) : (
+        <div class="blog-grid">
+          {allPosts.map(post => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+      )}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-header {
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border);
+    padding: calc(var(--nav-height) + var(--sp-12)) 0 var(--sp-12);
+  }
+
+  .blog-header__inner {
+    max-width: 700px;
+  }
+
+  .blog-header__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .blog-header__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 52ch;
+  }
+
+  .blog-main {
+    padding: var(--sp-12) 0 var(--sp-24);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .blog-empty {
+    text-align: center;
+    padding: var(--sp-24) 0;
+    color: var(--color-text-subtle);
+    font-size: var(--text-lg);
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

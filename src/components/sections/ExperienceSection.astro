@@ -1,0 +1,230 @@
+---
+const experiences = [
+  {
+    period: 'Jul – Aug 2025',
+    role: 'MERN Stack Intern',
+    company: 'Octalogicx Pvt. Ltd',
+    type: 'Internship',
+    description:
+      'Developed and maintained full-stack web features using MongoDB, Express.js, React, and Node.js. Collaborated with senior engineers on API design, improved code quality through reviews, and shipped production-ready modules within tight deadlines.',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+    icon: '💼',
+  },
+  {
+    period: 'Jan – Feb 2025',
+    role: 'Digital Marketing Intern',
+    company: 'Greenfuel Energy',
+    type: 'Internship',
+    description:
+      'Managed SEO audits and keyword strategies that improved organic traffic. Created data-driven marketing reports, ran social media campaigns, and implemented on-page SEO optimisations for the company website.',
+    tags: ['SEO', 'Content Strategy', 'Analytics', 'Social Media'],
+    icon: '📊',
+  },
+];
+---
+
+<section class="experience section section--alt" id="experience" aria-label="Work experience">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="section-label">&#47;&#47; career</span>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">The roles and projects that shaped my skills.</p>
+    </div>
+
+    <div class="timeline">
+      {experiences.map((exp, i) => (
+        <div class="timeline__item" data-animate data-animate-delay={String(i + 1)}>
+          <div class="timeline__line-wrap" aria-hidden="true">
+            <div class="timeline__dot">
+              <span class="timeline__dot-icon">{exp.icon}</span>
+            </div>
+            {i < experiences.length - 1 && <div class="timeline__connector"></div>}
+          </div>
+
+          <div class="timeline__card">
+            <div class="timeline__card-head">
+              <div>
+                <span class="timeline__period">{exp.period}</span>
+                <h3 class="timeline__role">{exp.role}</h3>
+                <p class="timeline__company">{exp.company}</p>
+              </div>
+              <span class="timeline__badge">{exp.type}</span>
+            </div>
+
+            <p class="timeline__desc">{exp.description}</p>
+
+            <div class="timeline__tags">
+              {exp.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Timeline layout */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--sp-6);
+  }
+
+  /* Left column: dot + connector */
+  .timeline__line-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline__dot {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    background: var(--color-white);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--r-full);
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline__dot-icon {
+    line-height: 1;
+  }
+
+  .timeline__connector {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-primary-light) 0%,
+      var(--color-border) 100%
+    );
+    margin: var(--sp-2) 0;
+  }
+
+  /* Card */
+  .timeline__card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-xl);
+    padding: var(--sp-6) var(--sp-8);
+    margin-bottom: var(--sp-8);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--t-base), transform var(--t-base);
+  }
+
+  .timeline__card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    border-color: var(--color-primary-light);
+  }
+
+  .timeline__card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-4);
+    flex-wrap: wrap;
+  }
+
+  .timeline__period {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    font-weight: 500;
+    margin-bottom: var(--sp-1);
+  }
+
+  .timeline__role {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--sp-1);
+  }
+
+  .timeline__company {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+    max-width: none;
+  }
+
+  .timeline__badge {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-muted);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--r-full);
+    letter-spacing: 0.03em;
+  }
+
+  .timeline__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: var(--sp-5);
+    max-width: 60ch;
+  }
+
+  .timeline__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+
+  /* Generic tag chip */
+  .tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--r-full);
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  }
+
+  .tag:hover {
+    background: var(--color-primary-muted);
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+  }
+
+  @media (max-width: 600px) {
+    .timeline__item {
+      grid-template-columns: 40px 1fr;
+      gap: var(--sp-4);
+    }
+
+    .timeline__dot {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+    }
+
+    .timeline__card {
+      padding: var(--sp-5);
+    }
+  }
+</style>

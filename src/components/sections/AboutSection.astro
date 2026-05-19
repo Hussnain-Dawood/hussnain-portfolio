@@ -1,0 +1,192 @@
+---
+const stats = [
+  { value: '4+',  label: 'Projects Built' },
+  { value: '15+', label: 'Technologies' },
+  { value: '2',   label: 'Internships' },
+  { value: '2+',  label: 'Years Coding' },
+];
+---
+
+<section class="about section" id="about" aria-label="About me">
+  <div class="container">
+    <div class="about__inner">
+
+      <!-- Text column -->
+      <div class="about__text" data-animate>
+        <div class="section-header" style="text-align:left; margin-bottom:var(--sp-6)">
+          <span class="section-label">&#47;&#47; about me</span>
+          <h2 class="section-title">Who I Am</h2>
+        </div>
+
+        <p class="about__para">
+          I'm <strong>Hussnain Dawood</strong>, a Software Engineering student at
+          <strong>COMSATS University Islamabad</strong> (2023–2027), building my career
+          as a <strong>Software Engineer </strong>. I specialise in the MERN stack —
+          MongoDB, Express.js, React, and Node.js — and bring internship experience
+          from real-world product teams.
+        </p>
+
+        <p class="about__para">
+          My technical toolkit includes <strong>JavaScript, TypeScript, Python, C++</strong>,
+          and <strong>SQL</strong>. I have a strong foundation in Data Structures &amp;
+          Algorithms, Object-Oriented Programming, and REST API design. I enjoy turning
+          complex problems into clean, efficient solutions.
+        </p>
+
+        <p class="about__para">
+          I'm actively seeking <strong>internships</strong> and <strong>entry-level roles</strong>
+          where I can contribute to ambitious products, keep learning at speed, and grow
+          alongside a talented team.
+        </p>
+
+        <div class="about__links">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#projects" class="btn btn-outline">See my work</a>
+        </div>
+      </div>
+
+      <!-- Stats column -->
+      <div class="about__stats-wrap" data-animate data-animate-delay="2">
+        <div class="about__stats">
+          {stats.map(s => (
+            <div class="about__stat-card">
+              <span class="about__stat-value">{s.value}</span>
+              <span class="about__stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="about__location-card">
+          <div class="about__location-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <p class="about__location-title">Based in</p>
+            <p class="about__location-value">Lahore, Pakistan</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--sp-16);
+    align-items: start;
+  }
+
+  .about__para {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--sp-5);
+    max-width: 58ch;
+  }
+
+  .about__para strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .about__links {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    margin-top: var(--sp-8);
+  }
+
+  /* Stats grid */
+  .about__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-5);
+  }
+
+  .about__stat-card {
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-xl);
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    transition: transform var(--t-base), box-shadow var(--t-base);
+  }
+
+  .about__stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+  }
+
+  .about__stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .about__stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  /* Location card */
+  .about__location-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    background: var(--color-primary-muted);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--r-xl);
+    padding: var(--sp-5) var(--sp-6);
+  }
+
+  .about__location-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--r-md);
+    flex-shrink: 0;
+  }
+
+  .about__location-title {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    max-width: none;
+    margin-bottom: 2px;
+  }
+
+  .about__location-value {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: var(--text-base);
+    max-width: none;
+  }
+
+  @media (max-width: 900px) {
+    .about__inner {
+      grid-template-columns: 1fr;
+      gap: var(--sp-10);
+    }
+
+    .about__para {
+      max-width: none;
+    }
+  }
+</style>

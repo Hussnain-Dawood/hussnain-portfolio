@@ -1,0 +1,79 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+}
+
+const {
+  title,
+  description = 'Full Stack Developer & App Developer based in Lahore, Pakistan. MERN stack specialist — React, Node.js, Express, MongoDB.',
+  image,
+  type = 'website',
+  publishDate,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e5fcc" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO {title} {description} {image} {type} {publishDate} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      /* Scroll-in animation via IntersectionObserver */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--sp-4);
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--sp-3) var(--sp-5);
+    border-radius: 0 0 var(--r-md) var(--r-md);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    z-index: 9999;
+    text-decoration: none;
+    transition: top var(--t-fast);
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+</style>

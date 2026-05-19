@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: Hussnain-Dawood/hussnain-portfolio   # update if your repo name differs
+  branch: main
+  base_url: https://YOUR-AUTH-WORKER.workers.dev  # replace after deploying the Worker
+
+# Where uploaded media is stored (committed to the repo)
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title",            name: "title",           widget: "string" }
+      - { label: "Publish Date",     name: "date",            widget: "datetime" }
+      - { label: "Author",           name: "author",          widget: "string",   default: "Hussnain Dawood" }
+      - { label: "Category",         name: "category",        widget: "string",   required: false }
+      - { label: "Tags",             name: "tags",            widget: "list",     required: false }
+      - { label: "Featured Image",   name: "featuredImage",   widget: "image",    required: false }
+      - { label: "Excerpt",          name: "excerpt",         widget: "text",     required: false }
+      - { label: "Meta Title",       name: "metaTitle",       widget: "string",   required: false }
+      - { label: "Meta Description", name: "metaDescription", widget: "text",     required: false }
+      - { label: "Draft",            name: "draft",           widget: "boolean",  default: false }
+      - { label: "Body",             name: "body",            widget: "markdown" }
