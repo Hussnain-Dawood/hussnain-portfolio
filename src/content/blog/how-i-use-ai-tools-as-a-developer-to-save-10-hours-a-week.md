@@ -9,7 +9,7 @@ featuredImage: ''
 excerpt: ''
 metaTitle: How I Use AI Tools as a Developer to Save 10+ Hours a Week
 metaDescription: A MERN stack developer's honest breakdown of the free and low-cost AI tools that actually save time — no hype, just real workflows
-draft: true
+draft: false
 ---
 
 As a Software Engineering student building MERN stack applications, I constantly fight against one enemy: **time**.
