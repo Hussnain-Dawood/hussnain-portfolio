@@ -6,7 +6,9 @@
       "PowerShell(Get-ChildItem \"D:\\\\Portfolio\\\\Portfolio\\\\node_modules\\\\astro\" -Name -Depth 0 | Where-Object { $_ -match \"loader\" })",
       "PowerShell(Get-ChildItem \"D:\\\\Portfolio\\\\Portfolio\\\\dist\" -Recurse -File | ForEach-Object { $_.FullName.Replace\\(\"D:\\\\Portfolio\\\\Portfolio\\\\dist\\\\\",\"\"\\) } | Sort-Object)",
       "Bash(Get-ChildItem -Recurse -Path \"D:\\\\Portfolio\\\\Portfolio\\\\src\" -Filter \"*ontact*\")",
-      "Bash(Select-Object FullName)"
+      "Bash(Select-Object FullName)",
+      "Bash(wrangler secret *)",
+      "Bash(wrangler deploy *)"
     ]
   }
 }
